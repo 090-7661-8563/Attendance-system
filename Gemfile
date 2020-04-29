@@ -28,7 +28,8 @@ gem 'roo'
 
 group :development, :test do
   gem 'sqlite3',                  '1.3.13'
-  gem 'byebug',                   '9.0.6', platform: :mri
+  gem 'byebug',                   '9.0.6', platform: [:mri, :mingw, :x64_mingw]
+
 end
 
 group :development do
@@ -51,7 +52,7 @@ group :test do
 end
 
 group :production do
-  
+  gem 'pg', '0.20.0'
   gem 'rails_12factor'
 end
 
