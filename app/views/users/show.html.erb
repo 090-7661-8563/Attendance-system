@@ -7,9 +7,9 @@
         <th>
         <!--先月へ-->
         <% if @user == current_user %>    
-          <%= link_to "◀︎" , user_path(params:{id: @user.id, first_day: @first_day.prev_month }), class: "btn btn-sm btn-primary" %>&emsp; 
+          <%= link_to "←︎" , user_path(params:{id: @user.id, first_day: @first_day.prev_month }), class: "btn btn-sm btn-primary" %>&emsp; 
           <%= @first_day.year %>年<%= @first_day.month %>月  時間管理表 &emsp;
-          <%= link_to "▶︎" , user_path(params:{id: @user.id, first_day: @first_day.next_month }), class: "btn btn-sm btn-primary" %>
+          <%= link_to "→︎" , user_path(params:{id: @user.id, first_day: @first_day.next_month }), class: "btn btn-sm btn-primary" %>
         <% else %>
           <%= @first_day.year %>年<%= @first_day.month %>月  時間管理表
         <% end %>
@@ -19,7 +19,7 @@
           <br>
           指定勤務終了時間:　<%= basic_info_time(@user.designated_finish_time) %>
         </th>
-        <th colspan="3">基本時間:　<%= basic_info_time(@user.basic_time) %> H</th>
+        <th colspan="3">基本時間:　<%= basic_info_time(@user.basic_time) %> H </th>
         <th>初日:　<%= @first_day %></th> 
       </tr>
       <tr>
@@ -61,9 +61,13 @@
       <% end %>
     <% end %>
     <!-- 一般ユーザー共通ボタン類 -->  
+  <div>
     <%= link_to "勤怠を編集", edit_attendance_path(params:{id: @user.id, first_day: @first_day}), class: "btn btn-sm btn-primary" %>
     <%= link_to "CSV出力", csv_export_path(format: :csv, params:{id: @user.id, first_day: @first_day}), class: "btn btn-sm btn-primary" %>
+  </div>
+  <div>
     <%= link_to "勤怠修正ログ（承認済み）", modified_log_path(params:{id: @user.id, first_day: @first_day}), class: "btn btn-sm btn-primary", remote: true %>
+  </div>
   <% end %>
   <div id="form_overtime-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
   <div id="check_approval-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
@@ -75,21 +79,21 @@
     <thead>
       <tr>
         <!--rowspan:縦結合、colspan：横結合-->
-        <th rowspan="3">残業申請</th>
-        <th rowspan="3">日付</th>
-        <th rowspan="3">曜日</th>
-        <th colspan="8">【実績】</th>
-        <th colspan="5">所定外勤務</th>
+        <th rowspan=4>残業申請</th>
+        <th rowspan=4>日付</th>
+        <th rowspan=4>曜日</th>
+        <th colspan=8>【実績】</th>
+        <th colspan=5>所定外勤務</th>
       </tr>
       <tr>
-        <th rowspan="1" colspan="3">出社</th>
-        <th rowspan="1" colspan="3">退社</th>
-        <th rowspan="2">在社時間</th>
-        <th rowspan="2">備考</th>
-        <th colspan="2">終了予定時間</th>
-        <th rowspan="2">時間外時間</th>
-        <th rowspan="2">業務処理内容</th>
-        <th rowspan="2">支持者確認㊞</th>
+        <th colspan=3>出社</th>
+        <th colspan=3>退社</th>
+        <th rowspan=2>在社時間</th>
+        <th rowspan=2>備考</th>
+        <th colspan=2>終了予定時間</th>
+        <th rowspan=2>時間外時間</th>
+        <th rowspan=2>業務処理内容</th>
+        <th rowspan=2>支持者確認㊞</th>
       </tr>
       <tr>
         <th>時</th>
@@ -123,7 +127,7 @@
         <!--５項：出社ボタン表示（当日かつ出社時間が存在しない場合）-->
         <td>
           <% if d.attendance_day == Date.current && d.started_time.nil? && @user == current_user %>
-            <%= button_to "出社",startedtime_create_path(@user,params:{id: @user.id}),{class: "btn btn-attendance btn-default"} %>
+            <%= button_to "出社",startedtime_create_path(@user,params:{id: @user.id}),{class: "btn btn-sm btn-primary"} %>
           <% end %>
         </td>
         <!--６〜７項：退社時間表示（データが存在する場合）-->
@@ -132,7 +136,7 @@
         <!--８項：退社ボタン表示（当日かつ出社時間あり、かつ退社時間なし）-->
         <td>
           <% if d.attendance_day == Date.current && d.started_time.present? && d.finished_time.nil? && @user == current_user %>
-            <%= button_to "退社",finishedtime_creat_path(@user,params:{id: @user.id}), class: "btn btn-attendance btn-default"%>
+            <%= button_to "退社",finishedtime_creat_path(@user,params:{id: @user.id}), {class: "btn btn-sm btn-primary"} %>
           <% end %>
           <div id="overtime_modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"></div>
         </td>

@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     @superiors = User.where(superior: true).where.not(id: @user.id)
     if current_user.admin? || current_user.id == @user.id ||current_user.superior
       
-      # もし今のユーザーが、上長なら
+      # もし今のユーザーが上長なら
       if current_user.superior == true
         
         # 所属長承認ステータスと上長選択が一致するもの
@@ -103,7 +103,7 @@ class UsersController < ApplicationController
     @started_time = @user.attendances.find_by(attendance_day: Date.current)
     @started_time.update_attributes(started_time: Time.new(Time.now.year,\
     Time.now.month, Time.now.day,Time.now.hour,Time.now.min,0))
-    flash[:info] = "今日も１日元気に頑張りましょう！"
+    flash[:info] = "本日もよろしくお願いします。"
     redirect_to @user 
   end
   
@@ -114,7 +114,7 @@ class UsersController < ApplicationController
     finishedtime = Time.new(Time.now.year,Time.now.month,\
     Time.now.day,Time.now.hour,Time.now.min,0)
     @finished_time.update_attributes(finished_time: finishedtime)
-    flash[:info] = "今日も一日お疲れ様でした！"
+    flash[:info] = "今日も一日お疲れ様でした。"
     redirect_to @user 
   end
 
@@ -136,7 +136,7 @@ class UsersController < ApplicationController
   
   def update
     if @user.update_attributes(user_params)
-      flash[:success] = "プロフィールを更新しました"
+      flash[:success] = "個人情報を更新しました"
       if current_user.admin?
         redirect_to users_path and return
       end 

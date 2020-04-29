@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_04_141137) do
+ActiveRecord::Schema.define(version: 2020_04_30_226261) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer "user_id"

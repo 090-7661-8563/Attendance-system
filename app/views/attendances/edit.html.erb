@@ -11,9 +11,9 @@
       <tr>
         <th>
             <!--先月へ-->
-        <%= link_to "◀︎" , user_path(params:{id: @user.id, first_day: @first_day.prev_month }), class: "btn btn-sm btn-primary" %>
+        <%= link_to "←︎" , user_path(params:{id: @user.id, first_day: @first_day.prev_month }), class: "btn btn-sm btn-primary" %>
         &emsp; <%= @first_day.year %>年<%= @first_day.month %>月  時間管理表 &emsp;
-        <%= link_to "▶︎" , user_path(params:{id: @user.id, first_day: @first_day.next_month }), class: "btn btn-sm btn-primary" %>
+        <%= link_to "→︎" , user_path(params:{id: @user.id, first_day: @first_day.next_month }), class: "btn btn-sm btn-primary" %>
         </th>
         <th>
           指定勤務開始時間:　<%= basic_info_time(@user.designated_start_time) %>
@@ -60,7 +60,7 @@
               <td><%= tf.time_field :modified_started_time,  class: 'form-control' %></td>
               <td><%= tf.time_field :modified_finished_time, class: 'form-control' %></td>
               <!--5項：翌日-->
-              <td><%= tf.check_box  :tomorrow, :as => :boolean, style:"width: 14px; height: 14px;" %></td>
+              <td><%= tf.check_box  :tomorrow, :as => :boolean, style:"width: 20px; height: 20px;" %></td>
               <!--6項：在社時間-->
               <td>
                 <%= modified_working_hours(d.modified_started_time, d.modified_finished_time) if d.modified_started_time.present? && d.modified_finished_time.present? %>
@@ -79,10 +79,9 @@
     	</tbody>
     </table>
     <center>
-      <%= f.submit "編集を保存する", style:"width:300px", class: "btn btn-primary" %>
-  
       <%= link_to "キャンセル", user_url(@user, params:{first_day: @first_day }),\
-      style:"width:300px", class: "btn btncancel btn-default" %>
+      style:"width:200px", class: "btn btncancel btn-default" %>
+      <%= f.submit "編集を保存する", style:"width:200px", class: "btn btn-primary" %>
     </center>
     <% end %>
 </div>

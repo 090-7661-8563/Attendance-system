@@ -1,7 +1,7 @@
-
 source 'https://rubygems.org'
 
 gem 'rails',                      '5.2.4'
+gem 'rails-i18n'
 gem 'bcrypt',                     '~> 3.1.11'
 gem 'puma',                       '~>3.12.2'
 gem 'faker',                      '1.7.3'

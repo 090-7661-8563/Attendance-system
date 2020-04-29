@@ -15,10 +15,10 @@
           <!--  <li><%#= link_to "勤怠表示", user_url(@user, params:{first_day: @first_day }) %></li>-->
           <!--<%# end %>  -->
           <% if current_user.admin? %>
-            <li><%= link_to "社員一覧", users_path %></li>
+            <li><%= link_to "ユーザー一覧", users_path %></li>
             <li><%= link_to "出勤中社員一覧", working_employees_index_path %></li>
-            <li><%= link_to "基本情報の更新", rule_path %></li>
             <li><%= link_to "拠点情報の修正", bases_path %></li>
+            <li><%= link_to "基本情報の修正", rule_path %></li>
           <% end %>
         <% if @user.presence %>
           <li><%#= link_to "トップへ", user_url(@user, params:{first_day: @first_day }) %></li>
@@ -29,7 +29,7 @@
               アカウント <b class="caret"></b>
             </a>
             <ul class="dropdown-menu">
-              <li><%= link_to "プロフィール編集", edit_user_path(current_user) %></li>
+              <li><%= link_to "個人情報の編集", edit_user_path(current_user) %></li>
               <li class="divider"></li>
               <li>
                 <%= link_to "ログアウト", logout_path, method: :delete %>
